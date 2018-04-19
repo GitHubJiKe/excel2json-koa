@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{{{title}}}</title>
+  <style>
+    html,
+    body {
+      margin: 0px;
+      padding: 0px;
+      border: 0px;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .my-header {
+      width: 100%;
+      height: 60px;
+      text-align: center;
+      background-color: grey;
+      color: honeydew;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 30pt;
+      line-height: 60px;
+    }
+
+    .my-content {
+      width: 100%;
+      height: 100%;
+      background-color: forestgreen;
+    }
+  </style>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+  <header class="my-header">
+    {{{header}}}
+  </header>
+  <div class="my-content">
+    {{{body}}}
+  </div>
+</body>
+
+</html>

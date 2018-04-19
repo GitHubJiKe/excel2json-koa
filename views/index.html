@@ -1,0 +1,101 @@
+<style>
+  .my-button {
+    flex-grow: 1;
+    align-content: center;
+    flex-basis: auto;
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-align: center;
+    margin: 5px;
+    height: 300px;
+  }
+
+  .my-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: stretch;
+  }
+
+  .my-links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: stretch;
+  }
+
+  .my-link {
+    text-align: center;
+  }
+</style>
+<script>
+  function openChooseFileWindow() {
+    var fileUploader = document.getElementById('my-file');
+    fileUploader.click();
+  }
+
+  function chooseFile() {
+    var fileUploader = document.getElementById('my-file');
+    var file = fileUploader.files[0];
+    if (file) {
+      //执行上传
+      var param = new FormData(); //创建form对象
+      param.append('chunk', '0');//断点传输
+      param.append('chunks', '1');
+      param.append('file', file, file.name)
+      var option = {
+        method: 'POST',
+        url: '/upload',
+        headers: {
+          'content-type': 'multipart/form-data'
+        },
+        data: param,
+        onUploadProgress: (pe) => {
+          console.log('pe :', pe);
+        }
+      }
+      axios(option).then(res => {
+        alert('上传成功！');
+        let list = makeList(res.data);
+        document.getElementById('excel').innerHTML = list.join('');
+      }).catch(err => {
+        alert(err.message);
+      });
+    } else {
+      alert('请选择您要上传的文件！')
+    }
+  }
+
+  function makeList(data) {
+    return data.map(v => `<li><a target="blank" href="/public/downloads/${v}.json">${v}</a></li>`)
+  }
+</script>
+<div class="my-buttons">
+  <button class="my-button" style="order:0;" onclick="openChooseFileWindow()">
+    Excel to Json
+  </button>
+
+  <input type="file" name="file" id="my-file" accept="a.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+    style="display: none;" onchange="chooseFile()">
+  </input>
+
+  <button class="my-button" style="order:1;">
+    wait to realize
+  </button>
+
+  <button class="my-button" style="order:2;">
+    wait to realize
+  </button>
+</div>
+<div class="my-links">
+  <div class="my-link">
+    <ul id="excel">
+    </ul>
+  </div>
+  <div class="my-link">
+  </div>
+  <div class="my-link">
+  </div>
+</div>
