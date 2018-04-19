@@ -2,9 +2,10 @@
  * @Author: peter.yuan 
  * @Date: 2018-04-19 16:49:15 
  * @Last Modified by: peter.yuan
- * @Last Modified time: 2018-04-19 20:53:24
+ * @Last Modified time: 2018-04-19 21:53:12
  */
-const PORT = 3000;
+let PORT = 3000;
+process.env.ENV == 'dev' ? PORT = 3000 : PORT = 8888;
 const koa = require('koa');
 const multer = require('koa-multer');
 const Router = require('koa-router');

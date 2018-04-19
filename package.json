@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./src/app.js"
+    "start": "ENV=dev node ./src/app.js",
+    "prod-start": "ENV=prod pm2 start ./src/app.js --name excel2data"
   },
   "keywords": [
     "excel",
